@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFix Pro | Soluciones Tecnológicas</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES Y RESET --- */
+        :root {
+            --primary-color: #0f172a;      /* Azul oscuro profundo */
+            --secondary-color: #334155;    /* Gris azulado */
+            --accent-color: #10b981;       /* Verde tecnológico (éxito/reparación) */
+            --accent-hover: #059669;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif; /* Tipografía técnica moderna */
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        ul { list-style: none; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            border-color: white;
+            color: var(--primary-color);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo span { color: var(--accent-color); }
+        .logo svg { width: 32px; height: 32px; fill: var(--accent-color); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--accent-color); }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        @media(max-width: 768px) {
+            .nav-links { display: none; } /* Oculto en móvil para simplificar este demo */
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            padding-top: 100px;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content { max-width: 800px; margin: 0 auto; padding: 20px; }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* --- SECCIONES GENERALES --- */
+        .section-padding { padding: 100px 0; }
+        .bg-gray { background-color: var(--bg-light); }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- SERVICIOS --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .icon-wrapper svg { width: 40px; height: 40px; stroke: currentColor; stroke-width: 1.5; fill: none; }
+        
+        .service-card h3 { font-size: 1.4rem; margin-bottom: 15px; }
+        .service-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- BENEFICIOS --- */
+        .benefits-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .benefits-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .check-icon {
+            min-width: 24px;
+            height: 24px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .benefit-text h4 { font-family: 'Inter', sans-serif; font-size: 1.1rem; margin-bottom: 5px; color: var(--primary-color); }
+        .benefit-text p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .benefit-img img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        @media(max-width: 768px) {
+            .benefits-container { grid-template-columns: 1fr; }
+        }
+
+        /* --- CONTACTO --- */
+        .contact-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-group { margin-bottom: 20px; }
+        
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark); font-size: 0.95rem; }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        textarea { resize: vertical; min-height: 120px; }
+
+        .success-message {
+            display: none;
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-color);
+            color: rgba(255,255,255,0.7);
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 { color: white; margin-bottom: 20px; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; }
+        .footer-col p, .footer-col a { color: rgba(255,255,255,0.7); display: block; margin-bottom: 10px; font-size: 0.9rem; }
+        .footer-col a:hover { color: var(--accent-color); }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* --- WHATSAPP FLOATING BTN --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover { transform: scale(1.1); background-color: #20BA5A; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* --- SCROLL ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Fijo -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2-1-10-5-2 1 10 5zm0 2l-10-5 10 5 10-5z"/><rect x="11" y="19" width="2" height="3"/><rect x="13" y="19" width="2" height="3"/></svg>
+                    TECH<span>FIX</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <a href="#contacto" class="btn btn-primary">Solicitar Servicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container hero-content reveal">
+            <h1>Reparaciones rápidas y confiables<br>para tus dispositivos.</h1>
+            <p>Especialistas en recuperación de datos, mantenimiento preventivo y reparaciones de hardware para PC, laptops y consolas.</p>
+            <a href="#contacto" class="btn btn-primary">Diagnóstico Gratuito</a>
+            <a href="#servicios" class="btn btn-secondary">Ver Servicios</a>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="section-padding bg-gray">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Nuestros Servicios</h2>
+                <p style="color: var(--text-muted)">Soluciones técnicas integrales para prolongar la vida útil de tu equipo.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Card 1 -->
+                <div class="service-card reveal">
+                    <div class="icon-wrapper">
+                        <!-- Icono Laptop -->
+                        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="20" x2="22" y2="20"></line></svg>
+                    </div>
+                    <h3>Reparación de PC/Laptops</h3>
+                    <p>Cambio de pantalla, teclado, batería y reparación de placa base. Recuperamos equipos que creías perdidos.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="service-card reveal">
+                    <div class="icon-wrapper">
+                        <!-- Icono Consola -->
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                    </div>
+                    <h3>Consolas y Gaming</h3>
+                    <p>Mantenimiento interno, limpieza de ventiladores, cambio de pasta térmica y reparación de puertos HDMI.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card reveal">
+                    <div class="icon-wrapper">
+                        <!-- Icono Herraamientas -->
+                        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    </div>
+                    <h3>Mantenimiento Preventivo</h3>
+                    <p>Limpieza profunda interna y externa, optimización de sistema operativo y eliminación de malware.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="service-card reveal">
+                    <div class="icon-wrapper">
+                        <!-- Icono Configuración -->
+                        <svg viewBox="0 0 24 24"><path d="M4 17v1h2v-1H4zm2 0v1H8v-1H6zm-4-4V10h2v3H2zm4 0v3h2v-3H6zm-4-4V6h2v3H2zm4 0v3h2V6H6zm10-1h2v1h-2zM4 2h16v20H4z"></path></svg>
+                    </div>
+                    <h3>Instalación & Config.</h3>
+                    <p>Formateo seguro, instalación de Windows/Mac/Linux y configuración de software especializado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios / Nosotros -->
+    <section id="nosotros" class="section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>¿Por qué elegir TechFix?</h2>
+            </div>
+            <div class="benefits-container reveal">
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="check-icon">✓</div>
+                        <div class="benefit-text">
+                            <h4>Rapidez de Servicio</h4>
+                            <p>La mayoría de reparaciones simples se completan en el mismo día. Sabemos que necesitas tu equipo.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="check-icon">✓</div>
+                        <div class="benefit-text">
+                            <h4>Técnicos Certificados</h4>
+                            <p>Personal altamente capacitado con años de experiencia en hardware de consumo y empresarial.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="check-icon">✓</div>
+                        <div class="benefit-text">
+                            <h4>Garantía Asegurada</h4>
+                            <p>Todas nuestras reparaciones incluyen garantía escrita de hasta 90 días por trabajo realizado.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="check-icon">✓</div>
+                        <div class="benefit-text">
+                            <h4>Presupuesto Transparente</h4>
+                            <p>Sin sorpresas. Evaluamos tu equipo y te damos un precio cerrado antes de iniciar cualquier trabajo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="benefit-img">
+                    <img src="https://images.unsplash.com/photo-1588508065123-287b28e013da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Técnico trabajando en placa de circuito">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section-padding bg-gray">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Solicita tu Reparación</h2>
+                <p style="color: var(--text-muted)">Cuéntanos qué problema tiene tu dispositivo y te responderemos en menos de 2 horas.</p>
+            </div>
+
+            <div class="contact-form-container reveal">
+                <div id="successMessage" class="success-message">
+                    ✅ ¡Recibido! Hemos registrado tu solicitud. Un técnico te contactará pronto.
+                </div>
+                
+                <form id="techForm">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" placeholder="juan@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" placeholder="+54 9 11..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Descripción del Problema</label>
+                        <textarea id="message" placeholder="Ej: Mi laptop hace ruido al encender y no carga..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Solicitud</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>TechFix Pro</h4>
+                    <p>Expertos en tecnología dedicados a devolverle la vida a tus aparatos electrónicos.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <p>Av. Tecnología 456, Local 12<br>Ciudad Futura, CP 1010</p>
+                    <p>+54 11 4567 8901</p>
+                    <p>soporte@techfixpro.com</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Horarios</h4>
+                    <p>Lun - Vie: 9:00 - 19:00</p>
+                    <p>Sáb: 10:00 - 14:00</p>
+                    <p>Dom: Cerrado</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="year"></span> TechFix Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Flotante WhatsApp -->
+    <a href="https://wa.me/" class="whatsapp-float" target="_blank" aria-label="Chat en WhatsApp">
+        <!-- Ícono SVG SVG Path Simplificado de Whatsapp -->
+        <svg style="width:32px;height:32px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+    </a>
+
+    <script>
+        // 1. Año Dinámico en Footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 2. Simulación de Envío de Formulario
+        const form = document.getElementById('techForm');
+        const successMsg = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenir recarga
+
+            // Validación básica (HTML5 ya ayuda con required, pero aseguramos JS también)
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            if(name && email) {
+                // Efecto visual de envío
+                const btn = form.querySelector('button[type="submit"]');
+                const originalText = btn.innerText;
+                
+                btn.innerText = 'Enviando Diagnóstico...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    form.style.display = 'none'; // Ocultar formulario
+                    successMsg.style.display = 'block'; // Mostrar mensaje éxito
+                    
+                    // Resetear después de unos segundos si se desea (opcional)
+                    // setTimeout(() => {
+                    //     form.reset();
+                    //     form.style.display = 'block';
+                    //     successMsg.style.display = 'none';
+                    //     btn.innerText = originalText;
+                    //     btn.disabled = false;
+                    // }, 5000);
+                    
+                }, 2000);
+            }
+        });
+
+        // 3. Animaciones al hacer Scroll (Fade In + Slide Up)
+        window.addEventListener('load', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Dejar de observar una vez animado
+                    }
+                });
+            }, {
+                threshold: 0.1, // Activar cuando el 10% es visible
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+    </script>
+</body>
+</html>

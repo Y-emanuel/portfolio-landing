@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justicia & Asociados | Estudio Jurídico Moderno</title>
+    
+    <!-- Google Fonts: Playfair Display (Serif para autoridad) e Inter (Sans para legibilidad) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES Y RESET --- */
+        :root {
+            --primary-color: #0F172A; /* Azul Marino Profundo */
+            --secondary-color: #334155; /* Gris Azulado */
+            --accent-color: #C5A059; /* Dorado/Papel antiguo elegante */
+            --light-bg: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        a { text-decoration: none; transition: var(--transition); }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--white);
+        }
+        .btn-accent:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--white);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span { color: var(--accent-color); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--secondary-color); font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        @media(max-width: 768px) {
+            .nav-links { display: none; } /* Simplificado para este ejemplo */
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--white);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* --- SECCIONES GENERALES --- */
+        .section-padding { padding: 100px 0; }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        .section-header p { color: var(--secondary-color); max-width: 600px; margin: 0 auto; }
+
+        /* --- SOBRE NOSOTROS --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        /* --- ÁREAS DE PRÁCTICA --- */
+        .bg-light { background-color: var(--light-bg); }
+
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .practice-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-top: 3px solid transparent;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .practice-card:hover {
+            transform: translateY(-10px);
+            border-top-color: var(--accent-color);
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(15, 23, 42, 0.05);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .practice-card h3 { font-size: 1.25rem; margin-bottom: 15px; }
+        .practice-card p { font-size: 0.95rem; color: var(--secondary-color); }
+
+        /* --- POR QUÉ ELEGIRNOS --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .check-icon {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* --- CONTACTO --- */
+        .contact-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            position: relative;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 4px;
+            color: var(--text-dark);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group { margin-bottom: 20px; }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+        }
+
+        textarea.form-control { resize: vertical; min-height: 120px; }
+
+        /* Mensaje de éxito oculto por defecto */
+        .success-message {
+            display: none;
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border: 1px solid #bbf7d0;
+            text-align: center;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0b1120;
+            color: rgba(255,255,255,0.7);
+            padding: 60px 0 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 { color: var(--white); margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-col p, .footer-col a { color: rgba(255,255,255,0.6); display: block; margin-bottom: 10px; }
+        .footer-col a:hover { color: var(--accent-color); }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        /* --- WHATSAPP FLOTANTE --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 2000;
+            font-size: 30px;
+        }
+        
+        .whatsapp-float:hover { transform: scale(1.1); background-color: #20BA5A; }
+
+        /* --- ANIMACIONES SCROLL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Media Queries */
+        @media(max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .contact-form { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">JUSTICIA <span>&</span> ASOCIADOS</a>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#areas">Áreas</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <a href="#contacto" class="btn btn-accent">Consulta Gratuita</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container hero-content reveal">
+            <h1>Defendemos sus derechos con integridad y estrategia.</h1>
+            <p>Más de 20 años de experiencia brindando soluciones jurídicas efectivas para particulares y empresas.</p>
+            <a href="#contacto" class="btn btn-accent">Solicitar Consulta</a>
+        </div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section id="nosotros" class="section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="reveal">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Sala de reuniones estudio jurídico" class="about-img">
+                </div>
+                <div class="reveal">
+                    <div class="section-header" style="text-align: left;">
+                        <h2>Nuestra Firma</h2>
+                        <div style="width: 50px; height: 3px; background: var(--accent-color); margin: 15px 0;"></div>
+                    </div>
+                    <p style="margin-bottom: 20px;">En Justicia & Asociados, entendemos que cada caso es único y requiere un enfoque personalizado. No somos solo abogados; somos su aliado estratégico en momentos críticos.</p>
+                    <p style="margin-bottom: 30px;">Nuestro compromiso es la excelencia profesional, la transparencia absoluta y la obtención de los mejores resultados posibles para nuestros clientes.</p>
+                    <ul style="margin-bottom: 30px;">
+                        <li style="margin-bottom: 10px;">✓ Atención personalizada y directa.</li>
+                        <li style="margin-bottom: 10px;">✓ Transparencia total en honorarios.</li>
+                        <li>✓ Equipo multidisciplinario de expertos.</li>
+                    </ul>
+                    <a href="#contacto" class="btn">Conozca al equipo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Áreas de Práctica -->
+    <section id="areas" class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Áreas de Práctica</h2>
+                <p>Especialización técnica enfocada en resolver sus conflictos legales.</p>
+            </div>
+            
+            <div class="practice-grid">
+                <div class="practice-card reveal">
+                    <div class="icon-circle">⚖️</div>
+                    <h3>Derecho Civil</h3>
+                    <p>Asesoramiento en contratos, arrendamientos, sucesiones y responsabilidad civil. Protegemos su patrimonio.</p>
+                </div>
+                
+                <div class="practice-card reveal">
+                    <div class="icon-circle">👥</div>
+                    <h3>Derecho Laboral</h3>
+                    <p>Defensa de trabajadores y empleadores en despidos, indemnizaciones y negociaciones colectivas.</p>
+                </div>
+                
+                <div class="practice-card reveal">
+                    <div class="icon-circle">💼</div>
+                    <h3>Derecho Comercial</h3>
+                    <p>Sociedades mercantiles, fusiones, quiebras y litigios comerciales. Estrategias para proteger su negocio.</p>
+                </div>
+
+                <div class="practice-card reveal">
+                    <div class="icon-circle">🔨</div>
+                    <h3>Derecho Penal</h3>
+                    <p>Defensa técnica en procesos penales. Asistencia policial y representación en tribunal con rigor procesal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por Qué Elegirnos -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>¿Por qué elegirnos?</h2>
+            </div>
+            <div class="features-grid reveal">
+                <div class="feature-item">
+                    <div class="check-icon">✔</div>
+                    <div>
+                        <h4>Experiencia Comprobada</h4>
+                        <p style="color: var(--secondary-color);">Más de dos décadas litigando casos complejos con alto índice de éxito.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="check-icon">✔</div>
+                    <div>
+                        <h4>Disponibilidad Total</h4>
+                        <p style="color: var(--secondary-color);">Comunicación fluida. Sabrá siempre el estado de su causa en tiempo real.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="check-icon">✔</div>
+                    <div>
+                        <h4>Tecnología Legal</h4>
+                        <p style="color: var(--secondary-color);">Utilizamos herramientas modernas para agilizar trámites y reducir costos.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="check-icon">✔</div>
+                    <div>
+                        <h4>Primeras Consultas Gratuitas</h4>
+                        <p style="color: var(--secondary-color);">Analizamos su caso sin compromiso para ofrecerle una hoja de ruta clara.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section-padding contact-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 style="color: var(--white);">Hablemos de su Caso</h2>
+                <p style="color: rgba(255,255,255,0.7);">Déjenos sus datos y nos pondremos en contacto a la brevedad.</p>
+            </div>
+
+            <div class="contact-container reveal">
+                <div class="contact-form">
+                    <div id="successMessage" class="success-message">
+                        ✅ Su mensaje ha sido enviado correctamente. Nos comunicaremos con usted pronto.
+                    </div>
+
+                    <form id="leadForm">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" id="name" class="form-control" placeholder="Ej: Juan Pérez">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" class="form-control" placeholder="Ej: juan@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Teléfono (Opcional)</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="+54 9 11...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Cuéntenos brevemente su situación</label>
+                            <textarea id="message" class="form-control" placeholder="Describe el motivo de tu consulta..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%;">Enviar Consulta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Justicia & Asociados</h4>
+                    <p>Comprometidos con la defensa de sus derechos con ética y profesionalismo.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <p>Av. Libertador 1234, Piso 5<br>Buenos Aires, Argentina</p>
+                    <p>+54 11 4567 8901</p>
+                    <p>consultas@justiciayasociados.com</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Enlaces Rápidos</h4>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#areas">Áreas de Práctica</a>
+                    <a href="#contacto">Agendar Cita</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="year"></span> Justicia & Asociados. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón WhatsApp -->
+    <a href="https://wa.me/" class="whatsapp-float" target="_blank" aria-label="Chat en WhatsApp">
+        <!-- Icono SVG simple de Whatsapp -->
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382C17.119 14.206 15.302 13.336 14.97 13.214C14.638 13.092 14.382 13.031 14.136 13.386C13.89 13.741 13.173 14.502 12.946 14.748C12.72 14.994 12.513 15.034 12.161 14.845C11.808 14.656 10.738 14.32 9.439 13.187C8.395 12.304 7.653 11.208 7.427 10.852C7.201 10.496 7.371 10.287 7.547 10.11C7.702 9.954 7.89 9.727 8.066 9.51C8.242 9.294 8.299 9.112 8.413 8.867C8.527 8.621 8.471 8.419 8.382 8.242C8.294 8.065 7.734 6.612 7.501 5.998C7.274 5.397 7.038 5.502 6.852 5.508C6.673 5.514 6.466 5.514 6.259 5.514C6.052 5.514 5.734 5.597 5.448 5.891C5.162 6.185 4.426 6.874 4.426 8.252C4.426 9.63 5.428 10.94 5.569 11.124C5.71 11.308 7.38 14.306 10.246 15.591C12.02 16.384 12.736 16.574 13.436 16.691C14.756 16.912 15.667 16.833 16.401 16.734C17.258 16.62 18.582 15.917 18.924 15.108C19.266 14.3 19.266 13.606 19.185 13.469C19.104 13.332 18.859 13.257 18.506 13.078L17.472 14.382ZM12.042 22.002C10.43 22.002 8.906 21.577 7.576 20.853L5.485 21.352L5.993 19.307C5.213 17.893 4.801 16.292 4.801 14.623C4.801 8.015 10.096 2.72 16.704 2.72C18.503 2.72 20.202 3.072 21.686 3.706C23.312 4.434 24.649 5.626 25.488 7.206C26.326 8.786 26.646 10.598 26.398 12.383C26.15 14.168 25.342 15.817 24.082 17.077C22.951 18.208 21.691 18.788 21.094 19.062C20.497 19.336 19.947 19.531 19.441 19.683C18.935 19.835 18.524 19.944 18.113 20.068C17.701 20.192 17.113 20.423 16.589 20.733C16.065 21.042 15.743 21.258 15.146 21.669C14.549 22.08 13.846 22.08 12.042 22.002ZM12.042 3.898C8.475 3.898 5.542 6.831 5.542 10.398C5.542 12.698 6.467 14.783 7.918 16.426L7.608 17.806L8.999 17.395C9.918 17.69 10.874 17.833 11.833 17.833C13.862 17.833 15.447 16.588 15.863 16.302C16.279 16.016 16.613 15.885 16.923 15.797C17.233 15.709 17.409 15.665 17.787 15.577C18.165 15.489 18.791 15.302 19.355 14.902C19.919 14.502 21.057 13.558 21.718 12.205C22.379 10.852 22.496 9.692 22.296 8.773C22.096 7.854 21.713 7.078 21.211 6.398C20.521 5.418 19.651 4.754 18.731 4.367C17.811 3.98 16.809 3.898 12.042 3.898Z" fill="white"/>
+        </svg>
+    </a>
+
+    <script>
+        // 1. Año Dinámico en Footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 2. Validación y Envío del Formulario
+        const form = document.getElementById('leadForm');
+        const successMsg = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenir recarga
+
+            // Validación básica simple
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+
+            if(name.value.trim() === '' || email.value.trim() === '' || message.value.trim() === '') {
+                alert('Por favor, complete todos los campos obligatorios.');
+                return;
+            }
+
+            if(!email.value.includes('@')) {
+                alert('Por favor, ingrese un correo válido.');
+                return;
+            }
+
+            // Simulación de envío exitoso
+            // Aquí iría tu lógica de backend o servicio de email
+            form.style.display = 'none'; // Ocultar formulario
+            
+            successMsg.style.display = 'block'; // Mostrar mensaje éxito
+            
+            // Resetear después de unos segundos (opcional)
+            setTimeout(() => {
+                // Opcional: mostrar el form nuevamente limpio si quieres reenviar
+                // form.reset(); 
+                // form.style.display = 'block';
+                // successMsg.style.display = 'none';
+            }, 5000);
+        });
+
+        // 3. Animación al hacer Scroll (Intersection Observer)
+        window.addEventListener('load', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Dejar de observar una vez animado
+                    }
+                });
+            }, {
+                threshold: 0.15, // Activar cuando el 15% del elemento es visible
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+   /* --- VARIABLES Y RESET --- */
+        :root {
+            --bg-deep: #0a0a12;
+            --bg-card: #13131f;
+            --primary-neon: #7a00ff;
+            --accent-cyan: #00f0ff;
+            --text-main: #ffffff;
+            --text-muted: #8b8b9e;
+            --border-tech: rgba(122, 0, 255, 0.2);
+            --font-head: "Rajdhani", sans-serif;
+            --font-body: "Inter", sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Fondo Grid Tecnológico */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(122, 0, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(122, 0, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; }
+        .container { max-width: 1200px; margin: auto; padding: 0 20px; }
+        .text-accent { color: var(--primary-neon); }
+        .section-padding { padding: 100px 0; }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            font-family: var(--font-head);
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            background: var(--primary-neon);
+            border: 1px solid var(--primary-neon);
+            transition: var(--transition);
+            box-shadow: 0 0 15px rgba(122, 0, 255, 0.4);
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: transparent;
+            box-shadow: 0 0 25px rgba(122, 0, 255, 0.6);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            margin-left: 15px;
+        }
+        .btn-outline:hover {
+            border-color: var(--primary-neon);
+            background: rgba(122, 0, 255, 0.1);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-content { max-width: 800px; }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; }
+        .cta-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        /* --- SECCIONES GENERALES --- */
+        .section-header { margin-bottom: 60px; text-align: center; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .line { width: 60px; height: 4px; background: var(--primary-neon); margin: 0 auto; }
+        
+        .value-grid, .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card, .project-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-neon);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Mockup Visual en Cards */
+        .mockup-frame {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .mockup-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .project-card:hover .mockup-frame img {
+            transform: scale(1.05);
+        }
+
+        .project-tag {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 600;
+        }
+        .project-title { font-size: 1.4rem; margin-bottom: 10px; color: #fff; }
+        .project-strategy {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* --- SOBRE MI --- */
+        .about-section {
+            background: linear-gradient(90deg, var(--bg-card), var(--bg-deep));
+            border-top: 1px solid var(--border-tech);
+            border-bottom: 1px solid var(--border-tech);
+        }
+        .about-text h3 { font-size: 2rem; margin-bottom: 20px; }
+
+        /* --- CTA FINAL --- */
+        .final-cta {
+            text-align: center;
+            padding: 120px 0;
+            background: radial-gradient(circle at center, rgba(122, 0, 255, 0.1) 0%, transparent 70%);
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- ANIMACIONES SCROLL --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Responsive Móvil */
+        @media(max-width: 768px) {
+            .value-grid, .portfolio-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .section-header h2 { font-size: 2rem; }
+        }
